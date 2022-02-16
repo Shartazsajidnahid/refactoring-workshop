@@ -3,7 +3,7 @@ package workshop.texttoHtml;
 public class greaterthan implements patternmatcher{
 
     @Override
-    public boolean matches(char character) {
+    public boolean match(char character) {
         return (character=='>');
     }
 

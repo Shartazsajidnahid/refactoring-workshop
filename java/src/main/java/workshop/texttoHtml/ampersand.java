@@ -2,7 +2,7 @@ package workshop.texttoHtml;
 
 public class ampersand implements patternmatcher{
     @Override
-    public boolean matches(char character) {
+    public boolean match(char character) {
         return (character=='&');
     }
 

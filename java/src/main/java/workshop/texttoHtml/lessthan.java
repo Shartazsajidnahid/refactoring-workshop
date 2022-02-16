@@ -3,7 +3,7 @@ package workshop.texttoHtml;
 public class lessthan implements patternmatcher{
 
     @Override
-    public boolean matches(char character) {
+    public boolean match(char character) {
         return (character=='<');
     }
 

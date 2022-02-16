@@ -1,26 +1,32 @@
 package workshop.fizzbuzz;
 
+
+
+import java.util.List;
+
 /**
  * Requirements:
  * For factor of three print Fizz instead of the number
  * For factor of five print Buzz instead of the number
  * For numbers which are factors of both three and five print FizzBuzz instead of the number
  */
-//hey there  sfasfsdff sf
 public class FizzBuzz {
-    public static String say(int number) {
-        String strReturn = null;
+    private List<PatternMatcher> patternMatchers;
+    private PatternMatcher nullObjectPattern;
+    public FizzBuzz(List<PatternMatcher> patternMatchers) {
+        super();
+        this.patternMatchers = patternMatchers;
+        this.nullObjectPattern = nullObjectPattern;
+    }
 
-        if (number % 15 == 0) {
-            strReturn = "FizzBuzz";
-        } else {
-            if (number % 3 == 0) strReturn = "Fizz";
-
-            if (number % 5 == 0) strReturn = "Buzz";
+    public String say(int number) {
+        String strReturn = "";
+        for (PatternMatcher patternMatcher : patternMatchers) {
+            if (patternMatcher.matches(number)) strReturn+=(patternMatcher.generateRresponse());
         }
 
-        if (strReturn != null) return strReturn;
-
-        return String.valueOf(number);
+        if(strReturn.isEmpty()) String.valueOf(number);
+        return strReturn;
     }
 }
+
