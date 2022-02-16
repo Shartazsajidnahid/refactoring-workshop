@@ -49,10 +49,10 @@ public class TriviaGame {
     public void roll(int roll) {
         System.out.println( players.get(currentPlayer) + " is the current player");
         System.out.println( "They have rolled a " + roll);
-        process(roll);
+        roll_process(roll);
     }
 
-    private void process(int roll) {
+    private void roll_process(int roll) {
         if(check_not_gettingout(roll)){
             System.out.println( players.get(currentPlayer) + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
