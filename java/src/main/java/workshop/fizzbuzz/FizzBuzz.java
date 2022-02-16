@@ -24,9 +24,7 @@ public class FizzBuzz {
         for (PatternMatcher patternMatcher : patternMatchers) {
             if (patternMatcher.matches(number)) strReturn+=(patternMatcher.generateRresponse());
         }
-
-        if(strReturn.isEmpty()) String.valueOf(number);
-        return strReturn;
+        return strReturn.isEmpty()? String.valueOf(number) : strReturn;
     }
 }
 
