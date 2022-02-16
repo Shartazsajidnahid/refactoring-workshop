@@ -1,4 +1,4 @@
-package workshop;
+package workshop.texttoHtml;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlaintextToHtmlConverter {
-  
+    private List<patternmatcher> patternmatcherList;
+
+    public PlaintextToHtmlConverter(List<patternmatcher> patternmatcherList) {
+        this.patternmatcherList = patternmatcherList;
+    }
+
     public String toHtml() throws Exception {
         String text = read();
         String htmlLines = basicHtmlEncode(text);
@@ -22,27 +27,15 @@ public class PlaintextToHtmlConverter {
     }
 
     private String basicHtmlEncode(String source) {
-        
-        int i = 0;
         List<String> result = new ArrayList<>();
         List<String> convertedLine = new ArrayList<>();
-        String characterToConvert = stashNextCharacterAndAdvanceThePointer(source);
+        samechar samecharacter = new samechar();
+        patternmatcherList.add(samecharacter);
         for (char characterToConvert : source.toCharArray()) {
-            switch (characterToConvert) {
-                case "<":
-                    convertedLine.add("&lt;");
-                    break;
-                case ">":
-                    convertedLine.add("&gt;");
-                    break;
-                case "&":
-                    convertedLine.add("&amp;");
-                    break;
-                case "\n":
-                    addANewLine(result,convertedLine);
-                    break;
-                default:
-                    pushACharacterToTheOutput(convertedLine,characterToConvert);
+            for (patternmatcher patternmatch : patternmatcherList ){
+                if(patternmatch.matches(characterToConvert)){
+                    convertedLine.add(patternmatch.generateResponse(characterToConvert)); break;
+                }
             }
         }
         addANewLine(result,convertedLine);
@@ -50,7 +43,6 @@ public class PlaintextToHtmlConverter {
         return finalResult;
     }
 
-   
     //stringfy convertedLine array and push into result
     //reset convertedLine
     private void addANewLine(List<String> result,List<String> convertedLine) {
