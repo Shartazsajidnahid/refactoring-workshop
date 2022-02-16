@@ -35,8 +35,6 @@ public class TriviaGame {
     }
 
     public boolean add(String playerName) {
-
-
         players.add(playerName);
         places[howManyPlayers()] = 0;
         purses[howManyPlayers()] = 0;
@@ -51,11 +49,15 @@ public class TriviaGame {
         return players.size();
     }
 
+    private boolean check_not_gettingout(int roll) {
+        return inPenaltyBox[currentPlayer] && (roll % 2 == 0);
+    }
+
     public void roll(int roll) {
         announce(players.get(currentPlayer) + " is the current player");
         announce("They have rolled a " + roll);
 
-        if(inPenaltyBox[currentPlayer] && (roll % 2 == 0)){
+        if(check_not_gettingout(roll)){
             announce(players.get(currentPlayer) + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
         }
@@ -66,7 +68,6 @@ public class TriviaGame {
             }
             update_location(roll);
         }
-
     }
 
     private void update_location(int roll) {
@@ -81,67 +82,58 @@ public class TriviaGame {
     }
 
     private void askQuestion() {
+
+        announce(announce_question());
+    }
+
+    private String announce_question() {
         if (currentCategory() == "Pop")
-            announce(popQuestions.removeFirst());
-        if (currentCategory() == "Science")
-            announce(scienceQuestions.removeFirst());
-        if (currentCategory() == "Sports")
-            announce(sportsQuestions.removeFirst());
-        if (currentCategory() == "Rock")
-            announce(rockQuestions.removeFirst());
+            return  (String) popQuestions.removeFirst();
+        else if (currentCategory() == "Science")
+            return (String) scienceQuestions.removeFirst();
+        else if (currentCategory() == "Sports")
+            return  (String) sportsQuestions.removeFirst();
+        else if (currentCategory() == "Rock")
+            return  (String) rockQuestions.removeFirst();
+
     }
 
 
     private String currentCategory() {
-        if (places[currentPlayer] == 0) return "Pop";
-        if (places[currentPlayer] == 4) return "Pop";
-        if (places[currentPlayer] == 8) return "Pop";
-        if (places[currentPlayer] == 1) return "Science";
-        if (places[currentPlayer] == 5) return "Science";
-        if (places[currentPlayer] == 9) return "Science";
-        if (places[currentPlayer] == 2) return "Sports";
-        if (places[currentPlayer] == 6) return "Sports";
-        if (places[currentPlayer] == 10) return "Sports";
-        return "Rock";
+        String[] category_check = new String[]{"Pop","Science","Sports","Rock","Pop","Science","Sports","Rock","Pop","Science","Sports","Rock"};
+        String strReturn = "";
+        strReturn = category_check[places[currentPlayer]];
+        return strReturn;
+    }
+
+    private boolean check_not_correctanswer() {
+        return inPenaltyBox[currentPlayer] && !isGettingOutOfPenaltyBox;
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayer]) {
-            if (isGettingOutOfPenaltyBox) {
-                announce("Answer was correct!!!!");
-                purses[currentPlayer]++;
-                announce(players.get(currentPlayer)
-                        + " now has "
-                        + purses[currentPlayer]
-                        + " Gold Coins.");
-
-                boolean winner = didPlayerWin();
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
-
-                return winner;
-            } else {
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
-                return true;
-            }
-
-
-        } else {
-
-            announce("Answer was correct!!!!");
-            purses[currentPlayer]++;
-            announce(players.get(currentPlayer)
-                    + " now has "
-                    + purses[currentPlayer]
-                    + " Gold Coins.");
-
-            boolean winner = didPlayerWin();
+        if(check_not_correctanswer()){
             currentPlayer++;
             if (currentPlayer == players.size()) currentPlayer = 0;
-
-            return winner;
+            return true;
         }
+        else{
+            return answer_was_correct();
+        }
+    }
+
+    private boolean answer_was_correct() {
+        announce("Answer was correct!!!!");
+        purses[currentPlayer]++;
+        announce(players.get(currentPlayer)
+                + " now has "
+                + purses[currentPlayer]
+                + " Gold Coins.");
+
+        boolean winner = didPlayerWin();
+        currentPlayer++;
+        if (currentPlayer == players.size()) currentPlayer = 0;
+
+        return winner;
     }
 
     public boolean wrongAnswer() {
