@@ -6,6 +6,7 @@ package workshop;
  * For factor of five print Buzz instead of the number
  * For numbers which are factors of both three and five print FizzBuzz instead of the number
  */
+//hey there
 public class FizzBuzz {
     public static String say(int number) {
         String strReturn = null;
