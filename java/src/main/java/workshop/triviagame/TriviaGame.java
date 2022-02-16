@@ -20,9 +20,9 @@ public class TriviaGame {
     public TriviaGame() {
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(createRockQuestion(i));
+            scienceQuestions.addLast("Science Question " + i);
+            sportsQuestions.addLast("Sports Question " + i);
+            rockQuestions.addLast("Rock Question " + i);
         }
     }
 
@@ -55,36 +55,29 @@ public class TriviaGame {
         announce(players.get(currentPlayer) + " is the current player");
         announce("They have rolled a " + roll);
 
-        if (inPenaltyBox[currentPlayer]) {
-            if (roll % 2 != 0) {
+        if(inPenaltyBox[currentPlayer] && (roll % 2 == 0)){
+            announce(players.get(currentPlayer) + " is not getting out of the penalty box");
+            isGettingOutOfPenaltyBox = false;
+        }
+        else {
+            if(inPenaltyBox[currentPlayer]) {
                 isGettingOutOfPenaltyBox = true;
-
                 announce(players.get(currentPlayer) + " is getting out of the penalty box");
-                places[currentPlayer] = places[currentPlayer] + roll;
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-
-                announce(players.get(currentPlayer)
-                        + "'s new location is "
-                        + places[currentPlayer]);
-                announce("The category is " + currentCategory());
-                askQuestion();
-            } else {
-                announce(players.get(currentPlayer) + " is not getting out of the penalty box");
-                isGettingOutOfPenaltyBox = false;
             }
-
-        } else {
-
-            places[currentPlayer] = places[currentPlayer] + roll;
-            if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-
-            announce(players.get(currentPlayer)
-                    + "'s new location is "
-                    + places[currentPlayer]);
-            announce("The category is " + currentCategory());
-            askQuestion();
+            update_location(roll);
         }
 
+    }
+
+    private void update_location(int roll) {
+        places[currentPlayer] = places[currentPlayer] + roll;
+        if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+
+        announce(players.get(currentPlayer)
+                + "'s new location is "
+                + places[currentPlayer]);
+        announce("The category is " + currentCategory());
+        askQuestion();
     }
 
     private void askQuestion() {
