@@ -28,30 +28,20 @@ public class PlaintextToHtmlConverter {
 
     private String basicHtmlEncode(String source) {
         List<String> result = new ArrayList<>();
-        List<String> convertedLine = new ArrayList<>();
+        //List<String> convertedLine = new ArrayList<>();
+        String convertedLine="";
         samechar samecharacter = new samechar();
         patternmatcherList.add(samecharacter);
         for (char characterToConvert : source.toCharArray()) {
             for (patternmatcher patternmatch : patternmatcherList ){
                 if(patternmatch.matches(characterToConvert)){
-                    convertedLine.add(patternmatch.generateResponse(characterToConvert)); break;
+                    convertedLine+=patternmatch.generateResponse(characterToConvert); break;
                 }
             }
         }
-        addANewLine(result,convertedLine);
-        String finalResult = String.join("<br />", result);
+        String[] finalr = convertedLine.split("\n");
+       // result = convertedLine.split("\n");
+        String finalResult = String.join("<br />", finalr);
         return finalResult;
-    }
-
-    //stringfy convertedLine array and push into result
-    //reset convertedLine
-    private void addANewLine(List<String> result,List<String> convertedLine) {
-        String line = String.join("", convertedLine);
-        result.add(line);
-        convertedLine = new ArrayList<>();
-    }
-
-    private void pushACharacterToTheOutput(List<String> convertedLine,String characterToConvert) {
-        convertedLine.add(characterToConvert);
     }
 }
