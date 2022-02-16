@@ -57,7 +57,6 @@ public class TriviaGameTest {
     class FakeTriviaGame extends TriviaGame {
         List<String> messages = new ArrayList<>();
 
-        @Override
         protected void announce(Object message) {
             messages.add(String.valueOf(message));
         }
