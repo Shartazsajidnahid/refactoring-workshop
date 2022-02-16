@@ -1,8 +1,6 @@
 package workshop.triviagame;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class TriviaGame {
     ArrayList players = new ArrayList();
@@ -23,23 +21,15 @@ public class TriviaGame {
         return "Rock Question " + index;
     }
 
-    public boolean isPlayable() {
-        return (howManyPlayers() >= 2);
-    }
-
     public boolean add(String playerName) {
         players.add(playerName);
-        places[howManyPlayers()] = 0;
-        purses[howManyPlayers()] = 0;
-        inPenaltyBox[howManyPlayers()] = false;
+        places[players.size()] = 0;
+        purses[players.size()] = 0;
+        inPenaltyBox[players.size()] = false;
 
         System.out.println(playerName + " was added");
         System.out.println( "They are player number " + players.size());
         return true;
-    }
-
-    public int howManyPlayers() {
-        return players.size();
     }
 
     private boolean check_not_gettingout(int roll) {
