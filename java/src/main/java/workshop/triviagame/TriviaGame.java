@@ -22,8 +22,8 @@ public class TriviaGame {
     public boolean add(String playerName) {
         playerDetailsList.add(new playerDetails(playerName, 0, 0, false));
 
-        System.out.println(playerName + " was added");
-        System.out.println( "They are player number " + playerDetailsList.size());
+        announce(playerName + " was added");
+        announce( "They are player number " + playerDetailsList.size());
         return true;
     }
 
@@ -32,20 +32,20 @@ public class TriviaGame {
     }
 
     public void roll(int roll) {
-        System.out.println( playerDetailsList.get(currentPlayer).getPlayerName()+ " is the current player");
-        System.out.println( "They have rolled a " + roll);
+        announce( playerDetailsList.get(currentPlayer).getPlayerName()+ " is the current player");
+        announce( "They have rolled a " + roll);
         roll_process(roll);
     }
 
     private void roll_process(int roll) {
         if(check_not_gettingout(roll)){
-            System.out.println( playerDetailsList.get(currentPlayer).getPlayerName()+ " is not getting out of the penalty box");
+            announce( playerDetailsList.get(currentPlayer).getPlayerName()+ " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
         }
         else {
             if(playerDetailsList.get(currentPlayer).isInPenaltyBox()) {
                 isGettingOutOfPenaltyBox = true;
-                System.out.println( playerDetailsList.get(currentPlayer).getPlayerName()+ " is getting out of the penalty box");
+                announce( playerDetailsList.get(currentPlayer).getPlayerName()+ " is getting out of the penalty box");
             }
             update_location(roll);
         }
@@ -53,8 +53,8 @@ public class TriviaGame {
 
     private void update_location(int roll) {
         playerDetailsList.get(currentPlayer).incrementPlaces(roll);
-        System.out.println(playerDetailsList.get(currentPlayer).getPlayerName() + "'s new location is "    + playerDetailsList.get(currentPlayer).getPlaces());
-        System.out.println( "The category is " + listofquestions.currentCategory(playerDetailsList.get(currentPlayer).getPlaces()));
+        announce(playerDetailsList.get(currentPlayer).getPlayerName() + "'s new location is "    + playerDetailsList.get(currentPlayer).getPlaces());
+        announce( "The category is " + listofquestions.currentCategory(playerDetailsList.get(currentPlayer).getPlaces()));
         listofquestions.askQuestion(playerDetailsList.get(currentPlayer).getPlaces());
     }
 
@@ -72,17 +72,17 @@ public class TriviaGame {
     }
 
     private boolean answer_was_correct() {
-        System.out.println("Answer was correct!!!!");
+        announce("Answer was correct!!!!");
         playerDetailsList.get(currentPlayer).incrementPurses(1);
-        System.out.println( playerDetailsList.get(currentPlayer).getPlayerName()+ " now has " + playerDetailsList.get(currentPlayer).getPurses() + " Gold Coins.");
+        announce( playerDetailsList.get(currentPlayer).getPlayerName()+ " now has " + playerDetailsList.get(currentPlayer).getPurses() + " Gold Coins.");
         currentPlayer++;
         if (currentPlayer == playerDetailsList.size()) currentPlayer = 0;
         return didPlayerWin();
     }
 
     public boolean wrongAnswer() {
-        System.out.println("Question was incorrectly answered");
-        System.out.println((playerDetailsList.get(currentPlayer).getPlayerName()+ " was sent to the penalty box"));
+        announce("Question was incorrectly answered");
+        announce((playerDetailsList.get(currentPlayer).getPlayerName()+ " was sent to the penalty box"));
         playerDetailsList.get(currentPlayer).setInPenaltyBox(true);
         currentPlayer++;
         if (currentPlayer == playerDetailsList.size()) currentPlayer = 0;
@@ -91,5 +91,9 @@ public class TriviaGame {
 
     private boolean didPlayerWin() {
         return !(playerDetailsList.get(currentPlayer).getPurses() == 6);
+    }
+
+    protected void announce(Object message) {
+        System.out.println(message);
     }
 }

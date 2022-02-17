@@ -12,6 +12,7 @@ public class ListOfQuestions{
 
     private HashMap<String,LinkedList<String>> question_list = new HashMap<>();
     String[] category = new String[]{"Pop","Science","Sports","Rock"};
+
 /*
     LinkedList<String> popQuestions = new LinkedList<String>();
     LinkedList<String> scienceQuestions = new LinkedList<String>();
@@ -42,13 +43,11 @@ public class ListOfQuestions{
         for (Map.Entry<String,LinkedList<String >> entry : question_list.entrySet()) {
             if(entry.getKey()==currentCategory(number)) return entry.getValue().removeFirst();
         }
-
 /*
         if (currentCategory(number) == "Pop")  return  (String) popQuestions.removeFirst();
         else if (currentCategory(number) == "Science") return (String) scienceQuestions.removeFirst();
         else if (currentCategory(number) == "Sports")  return  (String) sportsQuestions.removeFirst();
         else if (currentCategory(number) == "Rock") return  (String) rockQuestions.removeFirst();
-
  */
     }
 
