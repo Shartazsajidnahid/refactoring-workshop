@@ -27,20 +27,22 @@ public class PlaintextToHtmlConverter {
     }
 
     private String basicHtmlEncode(String source) {
-        List<String> result = new ArrayList<>();
-        String convertedLine="";
-        samechar samecharacter = new samechar();
-        patternmatcherList.add(samecharacter);
+        String[] initial_encode = initial_convert(source).split("\n");
+        String finalResult = String.join("<br />", initial_encode);
+        return finalResult;
+    }
+
+    private String initial_convert(String source ) {
+        String convertedLine="", response="";
         for (char characterToConvert : source.toCharArray()) {
+            response = Character.toString(characterToConvert);
             for (patternmatcher patternmatch : patternmatcherList ){
                 if(patternmatch.match(characterToConvert)){
-                    convertedLine+=(patternmatch.generateResponse(characterToConvert)); break;
+                     response = patternmatch.generateResponse(); break;
                 }
             }
+            convertedLine += response;
         }
-        String[] finalr = convertedLine.toString().split("\n");
-       // result = convertedLine.split("\n");
-        String finalResult = String.join("<br />", finalr);
-        return finalResult;
+        return convertedLine;
     }
 }

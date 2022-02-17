@@ -7,7 +7,7 @@ public class ampersand implements patternmatcher{
     }
 
     @Override
-    public String generateResponse(char character) {
+    public String generateResponse() {
         return "&amp;";
     }
 }

@@ -16,7 +16,6 @@ public class FizzBuzz {
     public FizzBuzz(List<PatternMatcher> patternMatchers) {
         super();
         this.patternMatchers = patternMatchers;
-        this.nullObjectPattern = nullObjectPattern;
     }
 
     public String say(int number) {
