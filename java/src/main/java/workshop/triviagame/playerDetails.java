@@ -3,6 +3,9 @@ package workshop.triviagame;
 
 public class playerDetails{
     private int places;
+
+
+    private int purses;
     private String playerName;
 
     public playerDetails(String playerName){
@@ -20,6 +23,18 @@ public class playerDetails{
         if (this.places > 11) this.places -= 12;
     }
 
+    public int getPurses() {
+        return purses;
+    }
+
+    public void setPurses(int purses) {
+        this.purses = purses;
+    }
+
+    public void incrementPurses(int number){
+        this.purses += number;
+    }
+
     public String getPlayerName() {
         return playerName;
     }
@@ -27,6 +42,8 @@ public class playerDetails{
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
+
+
 
 
 }

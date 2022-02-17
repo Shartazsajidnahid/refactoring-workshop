@@ -6,8 +6,6 @@ import java.util.List;
 
 public class TriviaGame {
     List<playerDetails> playerDetailsList;
-    ArrayList players = new ArrayList();
-    int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
     ListOfQuestions listofquestions;
@@ -28,7 +26,7 @@ public class TriviaGame {
        // players.add(playerName);
         playerDetailsList.add(new playerDetails(playerName));
         playerDetailsList.get(playerDetailsList.size()).setPlaces(0);
-        purses[playerDetailsList.size()] = 0;
+        playerDetailsList.get(playerDetailsList.size()).setPurses(0);
         inPenaltyBox[playerDetailsList.size()] = false;
 
         System.out.println(playerName + " was added");
@@ -82,8 +80,8 @@ public class TriviaGame {
 
     private boolean answer_was_correct() {
         System.out.println("Answer was correct!!!!");
-        purses[currentPlayer]++;
-        System.out.println( playerDetailsList.get(currentPlayer).getPlayerName()+ " now has " + purses[currentPlayer] + " Gold Coins.");
+        playerDetailsList.get(currentPlayer).incrementPurses(1);
+        System.out.println( playerDetailsList.get(currentPlayer).getPlayerName()+ " now has " + playerDetailsList.get(currentPlayer).getPurses() + " Gold Coins.");
         currentPlayer++;
         if (currentPlayer == playerDetailsList.size()) currentPlayer = 0;
         return didPlayerWin();
@@ -99,7 +97,7 @@ public class TriviaGame {
     }
 
     private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == 6);
+        return !(playerDetailsList.get(currentPlayer).getPurses() == 6);
     }
 
 }
