@@ -2,10 +2,8 @@ package workshop.triviagame;
 
 
 public class playerDetails{
-    private int places;
-
-
-    private int purses;
+    private int places, purses;
+    private boolean inPenaltyBox;
     private String playerName;
 
     public playerDetails(String playerName){
@@ -33,6 +31,14 @@ public class playerDetails{
 
     public void incrementPurses(int number){
         this.purses += number;
+    }
+
+    public boolean isInPenaltyBox() {
+        return inPenaltyBox;
+    }
+
+    public void setInPenaltyBox(boolean inPenaltyBox) {
+        this.inPenaltyBox = inPenaltyBox;
     }
 
     public String getPlayerName() {

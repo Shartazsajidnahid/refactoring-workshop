@@ -1,13 +1,10 @@
 package workshop.triviagame;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class TriviaGame {
     List<playerDetails> playerDetailsList;
-    boolean[] inPenaltyBox = new boolean[6];
-
     ListOfQuestions listofquestions;
 
     int currentPlayer = 0;
@@ -27,7 +24,7 @@ public class TriviaGame {
         playerDetailsList.add(new playerDetails(playerName));
         playerDetailsList.get(playerDetailsList.size()).setPlaces(0);
         playerDetailsList.get(playerDetailsList.size()).setPurses(0);
-        inPenaltyBox[playerDetailsList.size()] = false;
+        playerDetailsList.get(playerDetailsList.size()).setInPenaltyBox(false);
 
         System.out.println(playerName + " was added");
         System.out.println( "They are player number " + playerDetailsList.size());
@@ -35,7 +32,7 @@ public class TriviaGame {
     }
 
     private boolean check_not_gettingout(int roll) {
-        return inPenaltyBox[currentPlayer] && (roll % 2 == 0);
+        return playerDetailsList.get(currentPlayer).isInPenaltyBox() && (roll % 2 == 0);
     }
 
     public void roll(int roll) {
@@ -50,7 +47,7 @@ public class TriviaGame {
             isGettingOutOfPenaltyBox = false;
         }
         else {
-            if(inPenaltyBox[currentPlayer]) {
+            if(playerDetailsList.get(currentPlayer).isInPenaltyBox()) {
                 isGettingOutOfPenaltyBox = true;
                 System.out.println( playerDetailsList.get(currentPlayer).getPlayerName()+ " is getting out of the penalty box");
             }
@@ -66,7 +63,7 @@ public class TriviaGame {
     }
 
     private boolean check_not_correctanswer() {
-        return inPenaltyBox[currentPlayer] && !isGettingOutOfPenaltyBox;
+        return playerDetailsList.get(currentPlayer).isInPenaltyBox() && !isGettingOutOfPenaltyBox;
     }
 
     public boolean wasCorrectlyAnswered() {
@@ -90,7 +87,7 @@ public class TriviaGame {
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
         System.out.println((playerDetailsList.get(currentPlayer).getPlayerName()+ " was sent to the penalty box"));
-        inPenaltyBox[currentPlayer] = true;
+        playerDetailsList.get(currentPlayer).setInPenaltyBox(true);
         currentPlayer++;
         if (currentPlayer == playerDetailsList.size()) currentPlayer = 0;
         return true;
@@ -99,5 +96,4 @@ public class TriviaGame {
     private boolean didPlayerWin() {
         return !(playerDetailsList.get(currentPlayer).getPurses() == 6);
     }
-
 }
