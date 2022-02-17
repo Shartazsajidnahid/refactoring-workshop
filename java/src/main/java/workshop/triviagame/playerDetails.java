@@ -6,8 +6,11 @@ public class playerDetails{
     private boolean inPenaltyBox;
     private String playerName;
 
-    public playerDetails(String playerName){
+    public playerDetails(String playerName, int places, int purses, boolean inPenaltyBox){
         this.playerName = playerName;
+        this.places = places;
+        this.purses = purses;
+        this.inPenaltyBox = inPenaltyBox;
     }
     public int getPlaces() {
         return places;

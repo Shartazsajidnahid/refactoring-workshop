@@ -20,11 +20,7 @@ public class TriviaGame {
     }
 
     public boolean add(String playerName) {
-       // players.add(playerName);
-        playerDetailsList.add(new playerDetails(playerName));
-        playerDetailsList.get(playerDetailsList.size()).setPlaces(0);
-        playerDetailsList.get(playerDetailsList.size()).setPurses(0);
-        playerDetailsList.get(playerDetailsList.size()).setInPenaltyBox(false);
+        playerDetailsList.add(new playerDetails(playerName, 0, 0, false));
 
         System.out.println(playerName + " was added");
         System.out.println( "They are player number " + playerDetailsList.size());
