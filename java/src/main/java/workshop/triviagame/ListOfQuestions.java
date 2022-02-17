@@ -12,23 +12,24 @@ public class ListOfQuestions{
 
     private HashMap<String,LinkedList<String>> question_list = new HashMap<>();
     String[] category = new String[]{"Pop","Science","Sports","Rock"};
-
+/*
     LinkedList<String> popQuestions = new LinkedList<String>();
     LinkedList<String> scienceQuestions = new LinkedList<String>();
     LinkedList<String> sportsQuestions = new LinkedList<String>();
     LinkedList<String> rockQuestions = new LinkedList<String>();
+
+ */
 
     public ListOfQuestions(){
         for (String type : category) {
             question_list.put(type, new LinkedList<String>());
         }
 
-
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast("Science Question " + i);
-            sportsQuestions.addLast("Sports Question " + i);
-            rockQuestions.addLast("Rock Question " + i);
+            question_list.get("Pop").addLast("Pop Question " + i);
+            question_list.get("Science").addLast("Science Question " + i);
+            question_list.get("Sports").addLast("Science Question " + i);
+            question_list.get("Rock").addLast("Rock Question " + i);
         }
     }
 
@@ -37,10 +38,18 @@ public class ListOfQuestions{
     }
 
     private String announce_question(int number) {
+
+        for (Map.Entry<String,LinkedList<String >> entry : question_list.entrySet()) {
+            if(entry.getKey()==currentCategory(number)) return entry.getValue().removeFirst();
+        }
+
+/*
         if (currentCategory(number) == "Pop")  return  (String) popQuestions.removeFirst();
         else if (currentCategory(number) == "Science") return (String) scienceQuestions.removeFirst();
         else if (currentCategory(number) == "Sports")  return  (String) sportsQuestions.removeFirst();
         else if (currentCategory(number) == "Rock") return  (String) rockQuestions.removeFirst();
+
+ */
     }
 
 
