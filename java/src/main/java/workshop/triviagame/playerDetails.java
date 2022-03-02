@@ -1,6 +1,5 @@
 package workshop.triviagame;
 
-
 public class playerDetails{
     private int places, purses;
     private boolean inPenaltyBox;

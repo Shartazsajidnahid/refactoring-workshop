@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlaintextToHtmlConverter {
@@ -19,7 +18,6 @@ public class PlaintextToHtmlConverter {
         String htmlLines = basicHtmlEncode(text);
         return htmlLines;
     }
-
     private String read() throws IOException {
     	Path filePath = Paths.get("sample.txt");
     	byte[] fileByteArray = Files.readAllBytes(filePath);
@@ -27,22 +25,30 @@ public class PlaintextToHtmlConverter {
     }
 
     private String basicHtmlEncode(String source) {
-        String[] initial_encode = initial_convert(source).split("\n");
-        String finalResult = String.join("<br />", initial_encode);
+        String converted = initial_convert(source);
+
+        FinalSplit finalSplit = new FinalSplit();
+        List<String> initial_split = finalSplit.newLineSplit(converted);
+
+        String finalResult = String.join("<br />", initial_split);
         return finalResult;
     }
 
     private String initial_convert(String source ) {
-        String convertedLine="", response="";
+        StringBuilder convertedLine= new StringBuilder();
+        String response;
+
         for (char characterToConvert : source.toCharArray()) {
             response = Character.toString(characterToConvert);
             for (patternmatcher patternmatch : patternmatcherList ){
                 if(patternmatch.match(characterToConvert)){
-                     response = patternmatch.generateResponse(); break;
+                     response = patternmatch.generateResponse();
+                     break;
                 }
             }
-            convertedLine += response;
+            convertedLine.append(response);
         }
-        return convertedLine;
+        return convertedLine.toString();
     }
 }
+

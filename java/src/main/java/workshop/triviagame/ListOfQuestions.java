@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.*;
 
-
 public class ListOfQuestions {
 
     //TODO: implement a list-of-linkedlist or Map or something to replace 4 linkedlists
@@ -41,7 +40,8 @@ public class ListOfQuestions {
     private String announce_question(int number) {
 
         for (Map.Entry<String, LinkedList<String>> entry : question_list.entrySet()) {
-            if (entry.getKey() == currentCategory(number)) return entry.getValue().removeFirst();
+            if (entry.getKey() == currentCategory(number))
+                return entry.getValue().removeFirst();
         }
 /*
         if (currentCategory(number) == "Pop")  return  (String) popQuestions.removeFirst();
