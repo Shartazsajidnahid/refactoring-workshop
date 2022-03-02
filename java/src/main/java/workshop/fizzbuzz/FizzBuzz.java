@@ -23,6 +23,7 @@ public class FizzBuzz {
         for (PatternMatcher patternMatcher : patternMatchers) {
             if (patternMatcher.matches(number)) strReturn+=(patternMatcher.generateRresponse());
         }
+
         return strReturn.isEmpty()? String.valueOf(number) : strReturn;
     }
 }

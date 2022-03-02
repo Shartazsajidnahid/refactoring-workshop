@@ -7,7 +7,7 @@ public class newline implements patternmatcher{
     }
 
     @Override
-    public String generateResponse() {
+    public String generateResponse(char input) {
         return "\n";
     }
 }

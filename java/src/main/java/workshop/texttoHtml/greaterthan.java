@@ -8,7 +8,7 @@ public class greaterthan implements patternmatcher{
     }
 
     @Override
-    public String generateResponse() {
+    public String generateResponse(char input) {
         return "&gt;";
     }
 }

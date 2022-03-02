@@ -36,17 +36,15 @@ public class PlaintextToHtmlConverter {
 
     private String initial_convert(String source ) {
         StringBuilder convertedLine= new StringBuilder();
-        String response;
 
         for (char characterToConvert : source.toCharArray()) {
-            response = Character.toString(characterToConvert);
             for (patternmatcher patternmatch : patternmatcherList ){
                 if(patternmatch.match(characterToConvert)){
-                     response = patternmatch.generateResponse();
+                     convertedLine.append(patternmatch.generateResponse(characterToConvert)) ;
                      break;
                 }
             }
-            convertedLine.append(response);
+
         }
         return convertedLine.toString();
     }
