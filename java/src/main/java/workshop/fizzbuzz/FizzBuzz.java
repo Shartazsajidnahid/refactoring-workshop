@@ -13,18 +13,20 @@ import java.util.List;
 public class FizzBuzz {
     private List<PatternMatcher> patternMatchers;
     private PatternMatcher nullObjectPattern;
+
     public FizzBuzz(List<PatternMatcher> patternMatchers) {
         super();
         this.patternMatchers = patternMatchers;
     }
 
     public String say(int number) {
-        String strReturn = "";
-        for (PatternMatcher patternMatcher : patternMatchers) {
-            if (patternMatcher.matches(number)) strReturn+=(patternMatcher.generateRresponse());
-        }
+        StringBuilder strReturn = new StringBuilder();
 
-        return strReturn.isEmpty()? String.valueOf(number) : strReturn;
+        for (PatternMatcher patternMatcher : patternMatchers) {
+            if (patternMatcher.matches(number))
+                strReturn.append(patternMatcher.generateRresponse());
+        }
+        return (strReturn.length() == 0) ? String.valueOf(number) : strReturn.toString();
     }
 }
 
