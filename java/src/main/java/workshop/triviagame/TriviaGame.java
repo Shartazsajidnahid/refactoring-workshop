@@ -9,9 +9,8 @@ public class TriviaGame {
     private int currentPlayer = 0;
     private boolean isGettingOutOfPenaltyBox;
 
-    public TriviaGame(QuestionManager Questions, List<playerDetails> playerList) {
+    public TriviaGame(QuestionManager Questions) {
         this.Questions = Questions;
-        this.players = playerList;
     }
 
     public boolean add(String playerName) {

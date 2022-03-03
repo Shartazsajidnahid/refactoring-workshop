@@ -1,7 +1,9 @@
 package workshop;
 
 import org.junit.Test;
-import workshop.triviagame.TriviaGame;
+import workshop.texttoHtml.*;
+import workshop.triviagame.QuestionManager;
+import workshop.triviagame.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +12,24 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class TriviaGameTest {
-    FakeTriviaGame game = new FakeTriviaGame();
+    private QuestionManager Questions;
+
+    private QuestionTypes matcher1 = new popQuestions();
+    private QuestionTypes matcher2 = new sportsQuestions();
+    private QuestionTypes matcher3 = new scienceQuestions();
+    private QuestionTypes matcher4 = new rockQuesions();
+    List<QuestionTypes> matcherList = new ArrayList<>();
+
+    private void addtolist(){
+        matcherList.add(matcher1);
+        matcherList.add(matcher2);
+        matcherList.add(matcher3);
+        matcherList.add(matcher4);
+
+        Questions = new QuestionManager(matcherList);
+
+    }
+    FakeTriviaGame game = new FakeTriviaGame(Questions);
 
     @Test
     public void correctlyAnswered() {
@@ -56,6 +75,10 @@ public class TriviaGameTest {
 
     class FakeTriviaGame extends TriviaGame {
         List<String> messages = new ArrayList<>();
+
+        public FakeTriviaGame(QuestionManager Questions) {
+            super(Questions);
+        }
 
         protected void announce(Object message) {
             messages.add(String.valueOf(message));

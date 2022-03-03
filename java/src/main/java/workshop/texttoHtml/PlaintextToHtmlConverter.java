@@ -44,7 +44,6 @@ public class PlaintextToHtmlConverter {
                      break;
                 }
             }
-
         }
         return convertedLine.toString();
     }
