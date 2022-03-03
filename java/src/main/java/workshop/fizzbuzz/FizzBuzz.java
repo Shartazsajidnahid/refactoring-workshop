@@ -26,6 +26,10 @@ public class FizzBuzz {
             if (patternMatcher.matches(number))
                 strReturn.append(patternMatcher.generateRresponse());
         }
+       return  finalString(strReturn,number);
+    }
+
+    private String finalString(StringBuilder strReturn, int number){
         return (strReturn.length() == 0) ? String.valueOf(number) : strReturn.toString();
     }
 }

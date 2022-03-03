@@ -18,6 +18,7 @@ public class playerDetails{
     public void setPlaces(int places) {
         this.places = places;
     }
+
     public void incrementPlaces(int number){
         this.places += number;
         if (this.places > 11) this.places -= 12;

@@ -3,7 +3,7 @@ package workshop.triviagame;
 import java.util.LinkedList;
 
 public class rockQuesions implements QuestionTypes{
-    LinkedList<String> question = new LinkedList<String>();
+    private LinkedList<String> question = new LinkedList<String>();
     @Override
     public void addString(int i) {
         question.addLast("Rock Question " + i);

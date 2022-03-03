@@ -4,7 +4,7 @@ import java.util.List;
 
 public class QuestionManager {
 
-    List<QuestionTypes> questions;
+    private List<QuestionTypes> questions;
 
     public QuestionManager(List<QuestionTypes> questions) {
         this.questions = questions;
@@ -23,6 +23,7 @@ public class QuestionManager {
     private String announce_question(int number) {
         String category = currentCategory(number);
         StringBuilder returnQuestion = new StringBuilder();
+
         for (QuestionTypes questionTypes : questions) {
             if(questionTypes.match(category)){
                 returnQuestion.append(questionTypes.remove());
@@ -31,11 +32,10 @@ public class QuestionManager {
         return returnQuestion.toString();
     }
 
-    public String currentCategory(int currentPlace) {
-        int PlaceMod4 = currentPlace % 4;
-        return switch (PlaceMod4) {
+    public String currentCategory(int number) {
+        return switch (number % 4) {
             case 0 -> "Pop";
-            case 1 -> "Science ";
+            case 1 -> "Science";
             case 2 -> "Sports";
             default -> "Rock";
         };
